@@ -1,6 +1,6 @@
 ## Jobsity Challenge
 
-This is the challenge requested to my by jobsity. Coded in PHP by me using:
+This is the challenge requested to me by Jobsity. Coded in PHP by me using:
 
 - Composer
 - Laravel
@@ -8,5 +8,6 @@ This is the challenge requested to my by jobsity. Coded in PHP by me using:
 - Bootstrap 4
 - MariaDB database
 - Using an Apache server
+- Using PHP version 7.2
 
 ## Instructions for installation
