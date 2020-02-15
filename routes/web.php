@@ -13,6 +13,22 @@
 
 Auth::routes();
 
-Route::get('/', function() {
-    return view('welcome');
-})->name('home');
+Route::get('/', 'PagesController@index')->name('index');
+
+Route::get('/users/{username}', 'UsersController@index')->name('user.profile');
+
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
+Route::get('/entries/add', 'EntriesController@add')
+    ->name('entries.create')
+    ->middleware('auth');
+Route::post('/entries/add', 'EntriesController@add')
+    ->name('entries.create')
+    ->middleware('auth');
+
+Route::get('/entries/{id}/edit', 'EntriesController@edit')
+    ->name('entries.edit')
+    ->middleware('auth');
+Route::post('/entries/{id}/edit', 'EntriesController@edit')
+    ->name('entries.edit')
+    ->middleware('auth');

@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * Get user's entries.
+     */
+    public function entries()
+    {
+        return $this->hasMany('App\Entry');
+    }
 }
