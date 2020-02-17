@@ -49,7 +49,7 @@ class UsersController extends Controller
             $arr = [
                 $tweet->id => [
                     'text' => $tweet->text,
-                    'date' => $tweet->created_at,
+                    'date' => date('m-d-Y', strtotime($tweet->created_at)),
                     'hidden' => false
                 ]
             ];
@@ -64,27 +64,44 @@ class UsersController extends Controller
                 array_push($tweets, $arr);
             }
         }
-        dd($tweets);
         return response()->json($tweets);
     }
 
-    public function hideTweet($id, Request $request) {
+    public function toggleTweet($username, $id) {
         if(!$id) {
             App::abort(500, "You didn't specify a tweet.");
         }
-        $hiddenTweet = new HiddenTweet;
-        $hiddenTweet->tweet_id = $id;
-        $hiddenTweet->user_id = auth()->user()->id;
-        if($hiddenTweet->save()) {
-            return response()->json([
-                'result' => true,
-                'message' => "Tweet's been hidden."
-            ]);
+        $resp = [
+            'success' => true,
+            'message' => '',
+            'shown' => true
+        ];
+        $hiddenTweet = HiddenTweet::where('tweet_id', $id)->first();
+        if($hiddenTweet) {
+            if($hiddenTweet->delete()) {
+                $resp['message'] = 'Tweet is shown.';
+                $resp['shown'] = true;
+                return response()->json($resp);
+            } else {
+                $resp['success'] = false;
+                $resp['message'] = 'Tweet can\'t be shown, try again later.';
+                $resp['shown'] = false;
+                return response()->json($resp);
+            }
         } else {
-            return response()->json([
-                'result' => false,
-                'message' => "We couldn't hide the tweet, try again later."
-            ]);
+            $hiddenTweet = new HiddenTweet;
+            $hiddenTweet->tweet_id = $id;
+            $hiddenTweet->user_id = auth()->user()->id;
+            if($hiddenTweet->save()) {
+                $resp['message'] = 'Tweet is hidden.';
+                $resp['shown'] = false;
+                return response()->json($resp);
+            } else {
+                $resp['success'] = false;
+                $resp['message'] = 'Tweet can\'t be hidden, try again later.';
+                $resp['shown'] = true;
+                return response()->json($resp);
+            }
         }
     }
 }

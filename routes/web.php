@@ -17,8 +17,8 @@ Route::get('/', 'PagesController@index')->name('index');
 
 Route::get('/users/{username}', 'UsersController@index')->name('user.profile');
 Route::get('/users/{username}/tweets', 'UsersController@tweets')->name('user.tweets');
-Route::post('/users/{username}/tweets/{id}/hide', 'UsersController@hideTweet')
-    ->name('user.hide_tweet')
+Route::post('/users/{username}/tweets/toggle/{id}', 'UsersController@toggleTweet')
+    ->name('user.toggle_tweet')
     ->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('dashboard');
