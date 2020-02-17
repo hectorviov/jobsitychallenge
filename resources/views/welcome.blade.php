@@ -27,7 +27,7 @@
                 </div>
             </div>
             @endforeach
-            {{ $entries->links() }}
+            {{ $entries->onEachSide(1)->links() }}
         @else
         <div class="card mb-4">
             <div class="card-body">
