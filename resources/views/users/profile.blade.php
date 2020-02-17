@@ -31,8 +31,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        {{-- <h3 class="ml-4">Tweets</h3>
-        <div class="card mb-4">
+        <h3 class="ml-4">Tweets</h3>
+        {{-- <div class="card mb-4">
             <div class="card-body">
                 <h5 class="card-title">Entry title</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Author link</h6>
