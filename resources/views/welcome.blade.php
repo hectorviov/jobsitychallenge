@@ -12,7 +12,7 @@
             @foreach ($entries as $entry)
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $entry->title }}</h5>
+                    <a class="title-link" href="{{ route('entry.view', ['id' => $entry->id]) }}"><h4 class="card-title">{{ $entry->title }}</h4></a>
                     <h6 class="card-subtitle mb-2 text-muted">
                         <a href="{{ route('user.profile', ['username' => $entry->user->username ]) }}">By {{ $entry->user->username }}</a>
                         

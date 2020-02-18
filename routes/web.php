@@ -30,6 +30,8 @@ Route::post('/entries/add', 'EntriesController@add')
     ->name('entries.create')
     ->middleware('auth');
 
+Route::get('/entries/{id}', 'EntriesController@view')
+    ->name('entry.view');
 Route::get('/entries/{id}/edit', 'EntriesController@edit')
     ->name('entries.edit')
     ->middleware('auth');

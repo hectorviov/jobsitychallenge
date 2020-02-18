@@ -44,4 +44,9 @@ class EntriesController extends Controller
         }
         return view('entries.edit', ['entry' => $entry]);
     }
+
+    public function view($id) {
+        $entry = Entry::findOrFail($id);
+        return view('entries.view', ['entry'=> $entry]);
+    }
 }
